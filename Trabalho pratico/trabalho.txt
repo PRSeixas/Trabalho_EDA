@@ -1,0 +1,4 @@
+Operação 4, máquina 8 e tempo 9
+Operação 3, máquina 5 e tempo 6
+Operação 2, máquina 4 e tempo 5
+Operação 1, máquina 3 e tempo 5
