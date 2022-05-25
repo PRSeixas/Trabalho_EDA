@@ -12,7 +12,8 @@
 #include <stdio.h>
 #include <locale.h>
 
-#pragma region StructFuncoesProcedimentosMaquinas
+#pragma region Structs
+
 //Estrutura para criar máquinas com o número do código de sua referência e seus parâmetros
 typedef struct maquina
 {
@@ -28,6 +29,39 @@ typedef struct {
 	maquina* inicio;
 	int tam;
 }ListaMaquina;
+
+//Estrutura para criar um novo espaço na memória para cadastro de operações
+typedef struct operacao {
+	int cod;
+	struct operacao* nextOp;
+	struct maquina* nextM;
+}operacao;
+
+//Estrutura para iniciar a lista de operações
+typedef struct {
+	operacao* inicio;
+	int tam;
+}ListaOperacao;
+
+//Estrutura para criar job com o número do código de sua referência
+typedef struct job
+{
+	int cod;
+	struct job* nextJ;
+	struct job* left;
+	struct job* right;
+	struct operacao* ope;
+}job;
+
+//Lista inicial para Jobs
+typedef struct {
+	job* inicio;
+	int tam;
+}ListaJob, ListaJob1;
+
+#pragma endregion
+
+#pragma region FuncoesProcedimentosMaquinas
 
 //Função para alocar memória e criar máquina
 maquina* CriarMaquina(int cod, int tempo);
@@ -48,19 +82,6 @@ void RemoverMaq2(maquina* lista, int valor);
 #pragma endregion
 
 #pragma region StructFuncoesProcedimentosJobs
-//Estrutura para criar job com o número do código de sua referência
-typedef struct job
-{
-	int cod;
-	struct job* nextJ;
-	struct op* nextO;
-}job;
-
-//Lista inicial para Jobs
-typedef struct {
-	job* inicio;
-	int tam;
-}ListaJob, ListaJob1;
 
 //Função para criar Job
 job* criarJob(int cod);
@@ -77,21 +98,15 @@ job* inserirJobFim2(ListaJob* listaj, int valor);
 //Função para remover determinado Job da estrutura
 void RemoverJob(ListaJob* lista, int valor);
 
+//Função arvore de Job em teste
+job* inserirJobArvore(job* root, job* novo);
+
+//Função para procurar Job na árvore
+job* procurarJobArvore(job* root, int cod);
+
 #pragma endregion
 
 #pragma region StructFuncoesProcedimentosOperacoes
-//Estrutura para criar um novo espaço na memória para cadastro de operações
-typedef struct operacao {
-	int cod;
-	struct operacao* nextOp;
-	struct maquina* nextM;
-}operacao;
-
-//Estrutura para iniciar a lista de operações
-typedef struct {
-	operacao* inicio;
-	int tam;
-}ListaOperacao;
 
 //Função para criar operação
 operacao* CriarOperacao(int cod);
@@ -117,7 +132,7 @@ operacao* procurarOp(operacao* listaOperacao, int cod);
 job* inserirOpenoJob(job* listajob, operacao* listaOp, int codJob);
 
 //Inserir máquina na lista de operação
-void InserirMaqnaOpe(operacao* h, int codOp, int codMaq, int tempo);
+void InserirMaqnaOpe(operacao* h, int codOp, maquina* nova);
 
 //Listar operações e suas máquinas cadastradas
 void listarOpeComMaq(operacao* inicio);
@@ -137,6 +152,16 @@ void imprimirJob(ListaJob* listaj);
 
 //Imprimir lista de determinado Job com suas operações e máquinas cadastrados.
 void imprimirListaPorJob(ListaMaquina* lista, int j);
+
+//Imprimir árvore de Jobs Pre Order
+void listarArvorePreOrder(job* root);
+
+//Imprimir árvore de Jobs InOrder
+void listarArvoreInOrder(job* root);
+
+//Imprimir árvore de Jobs com operações e máquinas In Order
+void listarArvoreJobOpeInOrder(job* root);
+
 #pragma endregion
 
 #pragma region ManipulacaoDados
@@ -160,6 +185,7 @@ void listarJobCompleto(job* inicio, int codJob);
 //Função para calcular menor tempo disponível para efetuar um Job
 //Em desenvolvimento, corrigir erro de loop na verificação da lista de operações
 void ListarJobMenorTempo(operacao* lista);
+
 
 #pragma endregion
 

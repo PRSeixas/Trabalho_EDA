@@ -1,25 +1,9 @@
-﻿  Funcoes.c
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes.c(299,11): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'op *'
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes.c(299,11): warning C4313: 'printf': '%d' na cadeia de formato está em conflito com o argumento 1 do tipo 'op *'
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes.c(300,26): warning C4133: '=': tipos incompatíveis - de 'op *' para 'job *'
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes.c(410,11): warning C4101: 'aux2': variável local não referenciada
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes.c(439,36): warning C4047: '!=': 'int' difere em níveis de indireção de 'void *'
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes.c(442,31): warning C4133: '=': tipos incompatíveis - de 'operacao *' para 'op *'
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes.c(448,10): warning C4477: 'printf': a cadeia de formato '%d' requer um argumento do tipo 'int', mas um argumento variadic 1 tem o tipo 'op *'
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes.c(448,10): warning C4313: 'printf': '%d' na cadeia de formato está em conflito com o argumento 1 do tipo 'op *'
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes.c(449,31): warning C4133: '=': tipos incompatíveis - de 'operacao *' para 'job *'
-  Funcoes2.c
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes2.c(167,28): warning C4133: '=': tipos incompatíveis - de 'operacao *' para 'op *'
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes2.c(322,27): warning C4047: '!=': 'int' difere em níveis de indireção de 'void *'
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes2.c(338,25): warning C4047: '==': 'int' difere em níveis de indireção de 'void *'
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes2.c(346,29): warning C4133: '=': tipos incompatíveis - de 'op *' para 'operacao *'
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes2.c(400,16): warning C4133: '=': tipos incompatíveis - de 'maquina *' para 'operacao *'
-  Main2.c
-  Gerando Código...
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes2.c(50): warning C4716: 'inserirMaqInicio2': deve retornar um valor
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes2.c(130): warning C4716: 'inserirJobInicio2': deve retornar um valor
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes2.c(189): warning C4716: 'CriarOperacao': deve retornar um valor
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes2.c(207): warning C4716: 'inserirOpeInicio2': deve retornar um valor
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes.c(89): warning C4716: 'inserirMaqFim2': deve retornar um valor
-C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\Trabalho pratico\Funcoes.c(249): warning C4716: 'inserirJobFim2': deve retornar um valor
-  Trabalho pratico.vcxproj -> C:\Users\Pedro Raphael\OneDrive\IPCA\S 2\Estrutura de dados avançada\Trabalho prático\Trabalho pratico\x64\Debug\Trabalho pratico.exe
+﻿  Funcoes2.c
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(356,33): warning C4047: '!=': 'int' difere em níveis de indireção de 'void *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(402,25): warning C4047: '==': 'int' difere em níveis de indireção de 'void *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(464,16): warning C4133: '=': tipos incompatíveis - de 'maquina *' para 'operacao *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(50): warning C4716: 'inserirMaqInicio2': deve retornar um valor
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(133): warning C4716: 'inserirJobInicio2': deve retornar um valor
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(261): warning C4716: 'CriarOperacao': deve retornar um valor
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(279): warning C4716: 'inserirOpeInicio2': deve retornar um valor
+  Trabalho pratico.vcxproj -> C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\x64\Debug\Trabalho pratico.exe

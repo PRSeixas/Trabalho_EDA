@@ -208,7 +208,7 @@ void inserirJobFim(ListaJob* listaj, int valor) {
 	job* aux = (job*)malloc(sizeof(job));
 	novo->cod = valor;              //Valor do código de referência do job
 	novo->nextJ = NULL;             //Novo bloco aponta para NULL pois ocupará o final da lista
-	novo->nextO = NULL;             //Apontador para a lista de operações do Job correspondente
+	novo->ope = NULL;             //Apontador para a lista de operações do Job correspondente
 
 	if (listaj->inicio == NULL)
 	{
@@ -230,7 +230,7 @@ job* inserirJobFim2(ListaJob* listaj, int valor) {
 	job* aux = (job*)malloc(sizeof(job));
 	novo->cod = valor;
 	novo->nextJ = NULL;
-	novo->nextO = NULL;
+	novo->ope = NULL;
 
 	if (listaj->inicio == NULL)
 	{
@@ -294,10 +294,10 @@ void imprimirJob(ListaJob* listaj) {
 	{
 		printf("Job %d\n", inicio->cod);
 		inicio = inicio->nextJ;
-		if (listaj->inicio->nextO != NULL)
+		if (listaj->inicio->ope != NULL)
 		{
-			printf("As operações desse Jobs são: %d", inicio->nextO);
-			inicio = inicio->nextO;
+			printf("As operações desse Jobs são: %d", inicio->ope);
+			inicio = inicio->ope;
 		}
 	}
 	printf("\n");
@@ -439,13 +439,13 @@ void imprimirRelatorioJob(ListaJob* listaj, ListaMaquina* lista, ListaOperacao* 
 	while (listaj->inicio->cod != NULL)
 	{
 		if (listaj->inicio->cod == j) {
-			j1->nextO = listaOp->inicio;
+			j1->ope = listaOp->inicio;
 		}
 	}
 	printf("Operações do Job %d\n", j);
 	while (j1 != NULL)
 	{
-		printf("%d", j1->nextO);
+		printf("%d", j1->ope);
 		j1 = listaOp->inicio->nextOp;
 
 	}
@@ -526,7 +526,7 @@ job* inserirInicioJ(job* head, int cod) {
 	{
 		novo->cod = cod;
 		novo->nextJ = head;
-		novo->nextO = NULL;
+		novo->ope = NULL;
 		return (novo);
 	}
 	else return(head);

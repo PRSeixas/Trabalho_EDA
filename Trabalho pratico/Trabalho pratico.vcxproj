@@ -141,8 +141,11 @@
   <ItemGroup>
     <ClCompile Include="Funcoes.c" />
     <ClCompile Include="Funcoes2.c" />
+    <ClCompile Include="Jobs.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Main2.c" />
+    <ClCompile Include="Maquinas.c" />
+    <ClCompile Include="Operacoes.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lista.h" />
