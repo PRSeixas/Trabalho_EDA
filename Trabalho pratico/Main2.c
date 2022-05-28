@@ -507,20 +507,68 @@ int main() {
 	inserirOpenoJob(arvoreJobInicio, listaOperacaoJob7, 7);
 	inserirOpenoJob(arvoreJobInicio, listaOperacaoJob8, 8);
 
-	listarArvorePreOrder(arvoreJobInicio);
+	//listarArvorePreOrder(arvoreJobInicio);
 
-	printf("\n");
+	//printf("\n");
 
-	listarArvoreInOrder(arvoreJobInicio);
+	//listarArvoreInOrder(arvoreJobInicio);
 
-	printf("\n");
+	//printf("\n");
 
 	//teste de método
-	listarArvoreJobOpeInOrder(arvoreJobInicio);
+	//listarArvoreJobOpeInOrder(arvoreJobInicio);
+
+	#pragma region JobMenorTempo
+
+	operacao* Job1MenorTempo;
+	Job1MenorTempo = NULL;
+
+	operacao* Job2MenorTempo;
+	Job2MenorTempo = NULL;
+
+	operacao* Job3MenorTempo;
+	Job3MenorTempo = NULL;
+
+	operacao* Job4MenorTempo;
+	Job4MenorTempo = NULL;
+
+	operacao* Job5MenorTempo;
+	Job5MenorTempo = NULL;
+
+	operacao* Job6MenorTempo;
+	Job6MenorTempo = NULL;
+
+	operacao* Job7MenorTempo;
+	Job7MenorTempo = NULL;
+
+	operacao* Job8MenorTempo;
+	Job8MenorTempo = NULL;
+
+	//teste de estratégia para o escalonamento.
+	Job1MenorTempo = menorTempoOpe(listaOperacaoJob1);
+	Job2MenorTempo = menorTempoOpe(listaOperacaoJob2);
+	Job3MenorTempo = menorTempoOpe(listaOperacaoJob3);
+	Job4MenorTempo = menorTempoOpe(listaOperacaoJob4);
+	Job5MenorTempo = menorTempoOpe(listaOperacaoJob5);
+	Job6MenorTempo = menorTempoOpe(listaOperacaoJob6);
+	Job7MenorTempo = menorTempoOpe(listaOperacaoJob7);
+	Job8MenorTempo = menorTempoOpe(listaOperacaoJob8);
+
+	listarOpeComMaq(Job1MenorTempo);
+	listarOpeComMaq(Job2MenorTempo);
+	listarOpeComMaq(Job3MenorTempo);
+	listarOpeComMaq(Job4MenorTempo);
+	listarOpeComMaq(Job5MenorTempo);
+	listarOpeComMaq(Job6MenorTempo);
+	listarOpeComMaq(Job7MenorTempo);
+	listarOpeComMaq(Job8MenorTempo);
+
+	#pragma endregion
 
 	#pragma region ManipulacaoDados
 
-	//gravarDadosFicheiro(listaOperacao);
+	//Teste ok
+	//ficheiroArvoreInOrder(arvoreJobInicio);
 
 	#pragma endregion
 }

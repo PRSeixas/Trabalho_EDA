@@ -92,4 +92,5 @@ void listarCrescenteMaq(maquina* inicio)
 	}
 }
 
+
 #pragma endregion

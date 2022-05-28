@@ -128,5 +128,4 @@ void listarOpeComMaq(operacao* inicio) {
 		}
 	}
 }
-
 #pragma endregion

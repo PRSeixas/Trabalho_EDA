@@ -187,6 +187,13 @@ void listarJobCompleto(job* inicio, int codJob);
 void ListarJobMenorTempo(operacao* lista);
 
 
+void gravarDadosFicheiro2(operacao* lista);
+
+void ficheiroArvoreInOrder(job* root);
+
+operacao* menorTempoOpe(operacao* lista);
+maquina* maquinaMenorTempo(maquina* lista);
+
 #pragma endregion
 
 

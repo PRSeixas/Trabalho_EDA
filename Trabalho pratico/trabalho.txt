@@ -1,4 +1,149 @@
-Operação 4, máquina 8 e tempo 9
-Operação 3, máquina 5 e tempo 6
-Operação 2, máquina 4 e tempo 5
-Operação 1, máquina 3 e tempo 5
+
+Job 1
+
+operação4, máquina 8, tempo 9
+operação4, máquina 7, tempo 5
+operação4, máquina 6, tempo 4
+operação4, máquina 5, tempo 5
+operação4, máquina 4, tempo 5
+
+operação3, máquina 5, tempo 6
+operação3, máquina 3, tempo 5
+
+operação2, máquina 4, tempo 5
+operação2, máquina 2, tempo 4
+
+operação1, máquina 3, tempo 5
+operação1, máquina 1, tempo 4
+
+Job 2
+
+operação7, máquina 4, tempo 4
+
+operação6, máquina 8, tempo 4
+operação6, máquina 6, tempo 6
+operação6, máquina 1, tempo 5
+
+operação5, máquina 6, tempo 2
+operação5, máquina 4, tempo 1
+
+operação4, máquina 8, tempo 7
+operação4, máquina 7, tempo 4
+operação4, máquina 4, tempo 4
+
+operação3, máquina 6, tempo 6
+operação3, máquina 4, tempo 1
+
+operação2, máquina 8, tempo 4
+operação2, máquina 4, tempo 5
+
+operação1, máquina 5, tempo 7
+operação1, máquina 3, tempo 5
+operação1, máquina 1, tempo 1
+
+Job 3
+
+operação5, máquina 2, tempo 4
+operação5, máquina 1, tempo 1
+
+operação4, máquina 6, tempo 8
+operação4, máquina 4, tempo 7
+
+operação3, máquina 7, tempo 7
+operação3, máquina 5, tempo 8
+operação3, máquina 3, tempo 7
+
+operação2, máquina 8, tempo 7
+operação2, máquina 4, tempo 7
+
+operação1, máquina 8, tempo 8
+operação1, máquina 3, tempo 6
+operação1, máquina 2, tempo 7
+
+Job 4
+
+operação4, máquina 8, tempo 5
+operação4, máquina 6, tempo 5
+operação4, máquina 5, tempo 3
+
+operação3, máquina 7, tempo 7
+operação3, máquina 6, tempo 6
+operação3, máquina 4, tempo 5
+operação3, máquina 3, tempo 4
+
+operação2, máquina 8, tempo 4
+operação2, máquina 2, tempo 4
+
+operação1, máquina 5, tempo 7
+operação1, máquina 3, tempo 3
+operação1, máquina 1, tempo 4
+
+Job 5
+
+operação5, máquina 6, tempo 4
+operação5, máquina 4, tempo 5
+
+operação4, máquina 8, tempo 3
+operação4, máquina 6, tempo 3
+operação4, máquina 5, tempo 3
+
+operação3, máquina 8, tempo 4
+operação3, máquina 3, tempo 4
+
+operação2, máquina 4, tempo 5
+operação2, máquina 2, tempo 4
+
+operação1, máquina 1, tempo 3
+
+Job 6
+
+operação3, máquina 6, tempo 8
+operação3, máquina 3, tempo 9
+
+operação2, máquina 5, tempo 8
+operação2, máquina 4, tempo 7
+
+operação1, máquina 3, tempo 6
+operação1, máquina 2, tempo 5
+operação1, máquina 1, tempo 3
+
+Job 7
+
+operação5, máquina 3, tempo 3
+operação5, máquina 1, tempo 3
+
+operação4, máquina 8, tempo 5
+operação4, máquina 6, tempo 6
+operação4, máquina 4, tempo 4
+
+operação3, máquina 5, tempo 5
+operação3, máquina 4, tempo 4
+operação3, máquina 3, tempo 3
+operação3, máquina 1, tempo 3
+
+operação2, máquina 8, tempo 4
+operação2, máquina 7, tempo 6
+operação2, máquina 4, tempo 4
+
+operação1, máquina 6, tempo 4
+operação1, máquina 5, tempo 5
+operação1, máquina 3, tempo 4
+
+Job 8
+
+operação5, máquina 8, tempo 2
+operação5, máquina 7, tempo 1
+
+operação4, máquina 6, tempo 6
+operação4, máquina 4, tempo 4
+
+operação3, máquina 7, tempo 5
+operação3, máquina 3, tempo 4
+
+operação2, máquina 8, tempo 4
+operação2, máquina 5, tempo 5
+operação2, máquina 4, tempo 6
+
+operação1, máquina 6, tempo 4
+operação1, máquina 2, tempo 4
+operação1, máquina 1, tempo 3
