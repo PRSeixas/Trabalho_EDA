@@ -1,2 +1,11 @@
-﻿  Main2.c
+﻿  Funcoes2.c
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(40,22): warning C4133: '=': tipos incompatíveis - de 'maquina *' para 'operacao *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(77,22): warning C4133: '=': tipos incompatíveis - de 'maquina *' para 'operacao *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(111,22): warning C4133: '=': tipos incompatíveis - de 'maquina *' para 'operacao *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(132,25): warning C4047: '==': 'int' difere em níveis de indireção de 'void *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(194,16): warning C4133: '=': tipos incompatíveis - de 'maquina *' para 'operacao *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(235,32): warning C4028: parâmetro formal 1 diferente da declaração
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(262,23): warning C4133: '=': tipos incompatíveis - de 'maquina *' para 'operacao *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(340,2): warning C4033: 'lerFicheiroMaquinas' deve retornar um valor
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(341): warning C4715: 'lerFicheiroMaquinas': nem todos os caminhos de controle retornam um valor
   Trabalho pratico.vcxproj -> C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\x64\Debug\Trabalho pratico.exe

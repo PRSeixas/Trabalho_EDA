@@ -102,6 +102,38 @@ void InserirMaqnaOpe(operacao* h, int codOp, maquina* nova) {
 }
 
 /**
+ * .
+ * 
+ * \param lista
+ * \return 
+ */
+operacao* menorTempoOpe(operacao* lista)
+{
+	operacao* aux = lista;
+	operacao* novaoperacao = NULL;
+	operacao* novaLista = NULL;
+	maquina* nova = NULL;
+
+	if (aux == NULL)
+	{
+		return NULL;
+	}
+
+	while (aux != NULL)
+	{
+
+		nova = maquinaMenorTempo(aux->nextM);
+		novaoperacao = CriarOperacao(aux->cod);
+		novaLista = inserirOpeInicio2(novaLista, novaoperacao);
+
+		InserirMaqnaOpe(novaLista, aux->cod, nova);
+
+		aux = aux->nextOp;
+	}
+	return novaLista;
+}
+
+/**
 *@brief função para lisar operações cadastradas
 * @param [in] endereço da lista de operações
 */

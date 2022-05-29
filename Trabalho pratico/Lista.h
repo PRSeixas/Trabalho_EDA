@@ -59,6 +59,14 @@ typedef struct {
 	int tam;
 }ListaJob, ListaJob1;
 
+typedef struct dados
+{
+	int job;
+	int ope;
+	int maq;
+	int und;
+}dados;
+
 #pragma endregion
 
 #pragma region FuncoesProcedimentosMaquinas
@@ -78,6 +86,9 @@ maquina* inserirMaqFim2(ListaMaquina* lista, int valor, int tempo, int operacao,
 //Função para remover máquina da lista
 void RemoverMaq(ListaMaquina* lista, int valor);
 void RemoverMaq2(maquina* lista, int valor);
+
+//Função para percorrer lista e devolver máquina com menor tempo
+maquina* maquinaMenorTempo(maquina* lista);
 
 #pragma endregion
 
@@ -130,6 +141,9 @@ operacao* procurarOp(operacao* listaOperacao, int cod);
 
 //Inserir lista de operação na lista de Job
 job* inserirOpenoJob(job* listajob, operacao* listaOp, int codJob);
+
+//Cria lista auxiliar com as máquinas de menor tempo de um Job
+operacao* menorTempoOpe(operacao* lista);
 
 //Inserir máquina na lista de operação
 void InserirMaqnaOpe(operacao* h, int codOp, maquina* nova);
@@ -189,11 +203,20 @@ void ListarJobMenorTempo(operacao* lista);
 
 void gravarDadosFicheiro2(operacao* lista);
 
+
 void ficheiroArvoreInOrder(job* root);
 
-operacao* menorTempoOpe(operacao* lista);
-maquina* maquinaMenorTempo(maquina* lista);
+//Teste de função para ler e montar árvore de Jobs do ficheiro. Teste ok.
+job* lerFicheiroJobs(char* nomeFicheiro);
 
+//Teste de função para ler e montar a lista de operações de um determinado Job.
+operacao* lerFicheiroOperacao(char* nomeFicheiro);
+
+
+maquina* lerFicheiroMaquinas(char* nomeFicheiro, operacao* rootOpe);
+
+//teste de estratégia de escalonamento
+void ficheiroArvoreMinimoTempo(job* root);
 #pragma endregion
 
 

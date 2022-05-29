@@ -80,6 +80,37 @@ void RemoverMaq2(maquina* lista, int valor) {
 }
 
 /**
+ * .
+ * 
+ * \param lista
+ * \return 
+ */
+maquina* maquinaMenorTempo(maquina* lista)
+{
+	maquina* aux = lista;
+
+	if (aux == NULL)
+	{
+		return NULL;
+	}
+
+	maquina* minimo = aux;
+	aux = aux->nextm;
+
+	while (aux != NULL)
+	{
+		if (minimo->und > aux->und)
+		{
+			minimo = aux;
+		}
+		aux = aux->nextm;
+	}
+	minimo->nextm = NULL;
+
+	return minimo;
+}
+
+/**
 *@brief função para lisar máquinas cadastradas
 * @param [in] endereço da lista de máquinas
 */

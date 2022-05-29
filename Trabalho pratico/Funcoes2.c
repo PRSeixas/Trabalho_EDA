@@ -64,8 +64,6 @@ void ficheiroArvoreInOrder(job* root)
 	fprintf(file, "\nJob %d\n", root->cod);
 	fclose(file);
 
-	//printf("Job %d\n", root->cod);
-
 	aux = auxLista->ope;
 
 	while (aux != NULL)
@@ -85,7 +83,42 @@ void ficheiroArvoreInOrder(job* root)
 
 	ficheiroArvoreInOrder(root->right);
 }
+
+void ficheiroArvoreMinimoTempo(job* root)
+{
+	FILE* file;
+	job* auxLista = root;
+	operacao* aux = NULL;
+	operacao* aux2 = NULL;
+
+	if (root == NULL) return;
+	ficheiroArvoreMinimoTempo(root->left);
+	/*
+	file = fopen("jobMinimo.txt", "a");
+	fprintf(file, "\n%d\t", root->cod);
+	fclose(file);
+	*/
+	aux = auxLista->ope;
+
+	while (aux != NULL)
+	{
+		aux2 = aux;
+		file = fopen("jobMinimo.txt", "a");
+		fprintf(file, "\n");
+		while (aux2->nextM != NULL)
+		{
+			fprintf(file, "%d\t%d\t%d\t%d\t",auxLista->cod, aux->cod, aux2->nextM->cod, aux2->nextM->und);
+			aux2 = aux2->nextM;
+		}
+		aux = aux->nextOp;
+
+		fclose(file);
+	}
+
+	ficheiroArvoreMinimoTempo(root->right);
+}
 #pragma endregion
+
 
 #pragma region FuncoesEmDesenvolvimento
 
@@ -198,56 +231,6 @@ void ListarJobMenorTempo(operacao* lista) {
 	}*/
 }
 
-operacao* menorTempoOpe(operacao* lista)
-{
-	operacao* aux = lista;
-	operacao* novaoperacao = NULL;
-	operacao* novaLista = NULL;
-	maquina* nova = NULL;
-
-	if (aux == NULL)
-	{
-		return NULL;
-	}
-
-	while (aux != NULL)
-	{
-
-		nova = maquinaMenorTempo(aux->nextM); //erro na segunda passagem da lista de maquina
-		novaoperacao = CriarOperacao(aux->cod);
-		novaLista = inserirOpeInicio2(novaLista, novaoperacao);
-
-		InserirMaqnaOpe(novaLista, aux->cod, nova);
-		
-		aux = aux->nextOp; //verificar loop com erro, copia a informação apenas da primeira operação.
-	}
-	return novaLista;
-}
-
-maquina* maquinaMenorTempo(maquina* lista)
-{
-	maquina* aux = lista;
-
-	if (aux == NULL)
-	{
-		return NULL;
-	}
-
-	maquina* minimo = aux;
-	aux = aux->nextm;
-
-	while (aux != NULL)
-	{
-		if (minimo->und > aux->und)
-		{
-			minimo = aux;
-		}
-		aux = aux->nextm;
-	}
-	minimo->nextm = NULL;
-
-	return minimo;
-}
 
 void gravarDadosFicheiro2(job* root) {
 
@@ -287,5 +270,102 @@ void gravarDadosFicheiro2(job* root) {
 	}
 }
 
+//Teste de funcionamento ok. Efetuar alocação na aba correspondente e comentar.
+job* lerFicheiroJobs(char* nomeFicheiro)
+{
+	FILE* fp;
+	job* root = NULL;
+	job* novo;
+
+	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
+
+	job auxJobs;
+	int z = 0;
+	char c[1000];
+	while (fscanf(fp, "%[^\n] ", c) != EOF) {
+		sscanf(c, "%d\n", &auxJobs.cod);
+
+		novo = criarJob(auxJobs.cod);
+		root = inserirJobArvore(root, novo);
+	}
+
+	fclose(fp);
+	return root;
+
+}
+
+//Teste de funcionamento ok. Efetuar alocação na aba correspondente e comentar
+operacao* lerFicheiroOperacao(char* nomeFicheiro)
+{
+	FILE* fp;
+	operacao* root = NULL;
+	operacao* novo;
+
+
+	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
+
+	operacao auxOpe;
+	char c[1000];
+	while (fscanf(fp, "%[^\n] ", c) != EOF) {
+		sscanf(c, "%d\n", &auxOpe.cod);
+
+		novo = CriarOperacao(auxOpe.cod);
+		root = inserirOpeInicio2(root, novo);
+	}
+
+	fclose(fp);
+	return root;
+}
+
+//função em teste para gerar lista de máquinas.
+maquina* lerFicheiroMaquinas(char* nomeFicheiro, operacao* rootOpe)
+{
+	FILE* fp;
+	maquina* root = NULL;
+	maquina* nova;
+	int codOpe;
+
+	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
+
+	maquina auxMaq;
+	char c[1000];
+	while (fscanf(fp, "%[^\n] ", c) != EOF) {
+		sscanf(c, "%d\t%d\t%d\n", &codOpe, &auxMaq.cod, &auxMaq.und);
+
+		nova = CriarMaquina(auxMaq.cod, auxMaq.und);
+		InserirMaqnaOpe(rootOpe, codOpe, nova);
+	}
+
+	fclose(fp);
+	return;
+}
+
+job* arvoreJobMin(job* root)
+{
+	job* aux = root;
+	job* novaLista = NULL;
+	operacao* minOpe = NULL;
+
+	if (root == NULL)  return NULL;
+	
+	novaLista = lerFicheiroJobs("jobs.txt");
+
+	while (aux != NULL) {
+		minOpe = menorTempoOpe(aux->ope);
+		inserirOpenoJob(novaLista, minOpe, aux->cod);
+		
+		aux = aux->left;
+	}
+
+	while (aux != NULL) {
+		
+		minOpe = menorTempoOpe(aux->ope);
+		inserirOpenoJob(novaLista, minOpe, aux->cod);
+
+		aux = aux->right;
+	}
+
+	return novaLista;
+}
 #pragma endregion
 
