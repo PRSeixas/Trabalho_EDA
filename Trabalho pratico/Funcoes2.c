@@ -104,11 +104,12 @@ void ficheiroArvoreMinimoTempo(job* root)
 	{
 		aux2 = aux;
 		file = fopen("jobMinimo.txt", "a");
-		fprintf(file, "\n");
+		
 		while (aux2->nextM != NULL)
 		{
 			fprintf(file, "%d\t%d\t%d\t%d\t",auxLista->cod, aux->cod, aux2->nextM->cod, aux2->nextM->und);
 			aux2 = aux2->nextM;
+			fprintf(file, "\n");
 		}
 		aux = aux->nextOp;
 
@@ -317,7 +318,7 @@ operacao* lerFicheiroOperacao(char* nomeFicheiro)
 	return root;
 }
 
-//função em teste para gerar lista de máquinas.
+//Teste de funcionamento ok. Efetuar alocação na aba correspondente e comentar
 maquina* lerFicheiroMaquinas(char* nomeFicheiro, operacao* rootOpe)
 {
 	FILE* fp;
@@ -340,6 +341,24 @@ maquina* lerFicheiroMaquinas(char* nomeFicheiro, operacao* rootOpe)
 	return;
 }
 
+//função em desenvolvimento
+dados* lerFicheiroDados(char* nomeFicheiro)
+{
+	FILE* fp;
+	dados* root = NULL;
+	dados* nova;
+	int codJob;
+	int codOpe;
+	int codMaq;
+	int tempo;
+
+	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
+	
+
+}
+
+//Função em desenvolvimento
+//Verificar loop e funcionalidade
 job* arvoreJobMin(job* root)
 {
 	job* aux = root;
@@ -367,5 +386,36 @@ job* arvoreJobMin(job* root)
 
 	return novaLista;
 }
+
+//Função em desenvolvimento
+void IniciaPlano(Cel p[][T], int codJob, int codOper) {
+
+	for (int l = 0; l < M; l++)
+		for (int col = 0; col < T; col++) {
+			p[l][col].idJob = codJob;
+			p[l][col].idOpe = codOper;
+		}
+}
+
+void OcupaVarios(Cel p[][T], int mId, int totTempo, Cel* c) {
+
+	//Fase 1: Procurar a primeira "casa" livre
+	int col = 0;
+	while (p[mId][col].idJob != -1)
+		col++;
+
+	//Fase 1 - Ocupa a partir da posição livre encontrada
+	totTempo += col;	//porquê?
+	for (; col < totTempo; col++) {
+		p[mId][col].idJob = c->idJob;
+		p[mId][col].idOpe = c->idOpe;
+		//p[mId][col] = *c;
+	}
+
+	//Fase 2 - Procurar quando a operação anterior
+
+	//Fase 3 - Verficar se após posição livre existe tempo suficiente...
+}
+
 #pragma endregion
 

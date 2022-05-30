@@ -11,6 +11,11 @@
 //Bibliotecas nativas de C
 #include <stdio.h>
 #include <locale.h>
+#include <stdbool.h>
+
+#define M 8
+#define T 100
+
 
 #pragma region Structs
 
@@ -66,6 +71,12 @@ typedef struct dados
 	int maq;
 	int und;
 }dados;
+
+typedef struct Cel
+{
+	int idJob;
+	int idOpe;
+}Cel;
 
 #pragma endregion
 
@@ -217,6 +228,10 @@ maquina* lerFicheiroMaquinas(char* nomeFicheiro, operacao* rootOpe);
 
 //teste de estratégia de escalonamento
 void ficheiroArvoreMinimoTempo(job* root);
+
+void IniciaPlano(Cel p[][T], int codJob, int codOper);
+
+void OcupaVarios(Cel p[][T], int mId, int totTempo, Cel* c);
 #pragma endregion
 
 

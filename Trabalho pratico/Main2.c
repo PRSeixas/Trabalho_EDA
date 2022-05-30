@@ -288,5 +288,15 @@ int main() {
 	//Teste para estratégia de escalonamento
 	ficheiroArvoreMinimoTempo(arvoreJobMenorTempo);
 
+	#pragma region Planeamento
+
+	Cel plano[M][T];
+
+	IniciaPlano(plano, -1, -1);
+
+	
+
+	#pragma endregion
+	
 	#pragma endregion
 }
