@@ -354,6 +354,13 @@ dados* lerFicheiroDados(char* nomeFicheiro)
 
 	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
 	
+	dados auxDados;
+	char c[1000];
+	while (fscanf(fp, "%[^\n] ", c) != EOF)
+	{
+		sscanf(c, "%d\t%d\t%d\t%d\n", &auxDados.job, &auxDados.ope, &auxDados.maq, &auxDados.und);
+
+	}
 
 }
 
@@ -397,6 +404,7 @@ void IniciaPlano(Cel p[][T], int codJob, int codOper) {
 		}
 }
 
+//Função em desenvolvimento
 void OcupaVarios(Cel p[][T], int mId, int totTempo, Cel* c) {
 
 	//Fase 1: Procurar a primeira "casa" livre
@@ -417,5 +425,70 @@ void OcupaVarios(Cel p[][T], int mId, int totTempo, Cel* c) {
 	//Fase 3 - Verficar se após posição livre existe tempo suficiente...
 }
 
+//Função em desenvolvimento
+void OcupaPlanoDados(Cel p[][T], char* nomeFicheiro) {
+
+	FILE* fp;
+	int codJob = 0;
+	int codOpe = 0;
+	int codMaq = 0;
+	int tempo = 0;
+
+	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
+
+	dados aux;
+	char c[1000];
+	while (fscanf(fp, "%[^\n] ", c) != EOF)
+	{
+		sscanf(c, "%d\t%d\t%d\t%d\n", &aux.job, &aux.ope, &aux.maq, &aux.und);
+
+
+		//Fase 1: Procurar a primeira "casa" livre
+		int col = 0;
+		while (p[aux.maq][col].idJob != -1)
+			col++;
+
+		//Fase 2 - Verficar se após posição livre existe tempo suficiente...
+
+		//Fase 3 - Procurar quando a operação anterior
+
+		//Fase 4 - Ocupa a partir da posição livre encontrada
+		int colFim;
+		colFim = col + aux.und;
+		for (; col < colFim; col++) {
+			p[aux.maq][col].idJob = aux.job;
+			p[aux.maq][col].idOpe = aux.ope;
+		}
+	}
+}
+
+//Função em desenvolvimento
+void gravaDadosPlaneamento(Cel p[][T])
+{
+	FILE* file;
+	int maq = 0;
+	int col = 0;
+	int maqAux = 0;
+
+	//if (p[maq][col].idOpe == -1) return;
+
+	file = fopen("planeamento.txt", "a");
+
+	for (maq = 0; maq < M; maq++)
+	{
+		maqAux = maq + 1;
+		col = 0;
+		fprintf(file, "Máquina %d: ", maq);
+
+		while (p[maq][col].idJob != -1)
+		{
+			fprintf(file, " J%d O%d | ", p[maq][col].idJob, p[maq][col].idOpe);
+			col++;	
+		}
+		fprintf(file, "\n");
+	}
+	fclose(file);
+
+}
 #pragma endregion
 

@@ -13,7 +13,7 @@
 #include <locale.h>
 #include <stdbool.h>
 
-#define M 8
+#define M 9
 #define T 100
 
 
@@ -232,6 +232,10 @@ void ficheiroArvoreMinimoTempo(job* root);
 void IniciaPlano(Cel p[][T], int codJob, int codOper);
 
 void OcupaVarios(Cel p[][T], int mId, int totTempo, Cel* c);
+
+void OcupaPlanoDados(Cel p[][T], char* nomeFicheiro);
+
+void gravaDadosPlaneamento(Cel p[][T]);
 #pragma endregion
 
 

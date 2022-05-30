@@ -294,7 +294,9 @@ int main() {
 
 	IniciaPlano(plano, -1, -1);
 
-	
+	OcupaPlanoDados(plano, "jobMinimo.txt");
+
+	gravaDadosPlaneamento(plano);
 
 	#pragma endregion
 	

@@ -1,1 +1,18 @@
-﻿  Trabalho pratico.vcxproj -> C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\x64\Debug\Trabalho pratico.exe
+﻿  Funcoes2.c
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(40,22): warning C4133: '=': tipos incompatíveis - de 'maquina *' para 'operacao *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(77,22): warning C4133: '=': tipos incompatíveis - de 'maquina *' para 'operacao *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(111,22): warning C4133: '=': tipos incompatíveis - de 'maquina *' para 'operacao *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(133,25): warning C4047: '==': 'int' difere em níveis de indireção de 'void *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(195,16): warning C4133: '=': tipos incompatíveis - de 'maquina *' para 'operacao *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(236,32): warning C4028: parâmetro formal 1 diferente da declaração
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(263,23): warning C4133: '=': tipos incompatíveis - de 'maquina *' para 'operacao *'
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(341,2): warning C4033: 'lerFicheiroMaquinas' deve retornar um valor
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(353,6): warning C4101: 'tempo': variável local não referenciada
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(351,6): warning C4101: 'codOpe': variável local não referenciada
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(350,6): warning C4101: 'codJob': variável local não referenciada
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(349,9): warning C4101: 'nova': variável local não referenciada
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(352,6): warning C4101: 'codMaq': variável local não referenciada
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(437,58): warning C4098: 'OcupaPlanoDados': função 'void' retornando um valor
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(342): warning C4715: 'lerFicheiroMaquinas': nem todos os caminhos de controle retornam um valor
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(365): warning C4715: 'lerFicheiroDados': nem todos os caminhos de controle retornam um valor
+  Trabalho pratico.vcxproj -> C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\x64\Debug\Trabalho pratico.exe
