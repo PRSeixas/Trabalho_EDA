@@ -14,7 +14,7 @@
 #include <stdbool.h>
 
 #define M 9
-#define T 100
+#define T 75
 
 
 #pragma region Structs

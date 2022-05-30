@@ -433,6 +433,9 @@ void OcupaPlanoDados(Cel p[][T], char* nomeFicheiro) {
 	int codOpe = 0;
 	int codMaq = 0;
 	int tempo = 0;
+	int colFim = 0;
+	int col = 0;
+	int auxJob = 0;
 
 	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
 
@@ -443,22 +446,26 @@ void OcupaPlanoDados(Cel p[][T], char* nomeFicheiro) {
 		sscanf(c, "%d\t%d\t%d\t%d\n", &aux.job, &aux.ope, &aux.maq, &aux.und);
 
 
-		//Fase 1: Procurar a primeira "casa" livre
-		int col = 0;
+		//Fase 1: Procurar a primeira "casa" livre e inicia depois da última operação.
+		if (auxJob == aux.job)
+		{
+			col = colFim;
+		}
+		else col = 0;
+		
 		while (p[aux.maq][col].idJob != -1)
 			col++;
 
 		//Fase 2 - Verficar se após posição livre existe tempo suficiente...
 
-		//Fase 3 - Procurar quando a operação anterior
-
 		//Fase 4 - Ocupa a partir da posição livre encontrada
-		int colFim;
+
 		colFim = col + aux.und;
 		for (; col < colFim; col++) {
 			p[aux.maq][col].idJob = aux.job;
 			p[aux.maq][col].idOpe = aux.ope;
 		}
+		auxJob = aux.job;
 	}
 }
 
@@ -469,22 +476,47 @@ void gravaDadosPlaneamento(Cel p[][T])
 	int maq = 0;
 	int col = 0;
 	int maqAux = 0;
+	int t = 0;
 
 	//if (p[maq][col].idOpe == -1) return;
 
-	file = fopen("planeamento.txt", "a");
-
+	file = fopen("planeamento.csv", "a");
+	/*
+	for (maq = 0; maq < 1; maq++)
+	{
+		fprintf(file, "---------- ");
+		for (col = 0; col < T; col++)
+		{
+			t++;
+			fprintf(file, " T%d", t);
+		}
+		fprintf(file, "\n");
+	}
+	*/
 	for (maq = 0; maq < M; maq++)
 	{
-		maqAux = maq + 1;
 		col = 0;
-		fprintf(file, "Máquina %d: ", maq);
+		fprintf(file, "Máquina %d: ,", maq);
 
-		while (p[maq][col].idJob != -1)
+		for (int l = 0; l < M; l++)
+			for (int col = 0; col < T; col++) {
+				if (p[maq][col].idJob == -1)
+				{
+					fprintf(file, "     ,");
+				}
+				else
+				{
+					fprintf(file, "J%dO%d,", p[maq][col].idJob, p[maq][col].idOpe);
+				}
+			}
+		/*
+		while (p[maq][col].idJob != -1 && col != T)
 		{
-			fprintf(file, " J%d O%d | ", p[maq][col].idJob, p[maq][col].idOpe);
+			fprintf(file, " J%d O%d |", p[maq][col].idJob, p[maq][col].idOpe);
 			col++;	
 		}
+		*/
+
 		fprintf(file, "\n");
 	}
 	fclose(file);

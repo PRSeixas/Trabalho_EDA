@@ -12,7 +12,7 @@ C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c
 C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(350,6): warning C4101: 'codJob': variável local não referenciada
 C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(349,9): warning C4101: 'nova': variável local não referenciada
 C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(352,6): warning C4101: 'codMaq': variável local não referenciada
-C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(437,58): warning C4098: 'OcupaPlanoDados': função 'void' retornando um valor
+C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(440,58): warning C4098: 'OcupaPlanoDados': função 'void' retornando um valor
 C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(342): warning C4715: 'lerFicheiroMaquinas': nem todos os caminhos de controle retornam um valor
 C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\Trabalho pratico\Funcoes2.c(365): warning C4715: 'lerFicheiroDados': nem todos os caminhos de controle retornam um valor
   Trabalho pratico.vcxproj -> C:\Users\Pedro Raphael\Documents\GitHub\Trabalho_EDA\x64\Debug\Trabalho pratico.exe

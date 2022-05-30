@@ -225,29 +225,21 @@ int main() {
 
 	#pragma region JobMenorTempo
 
-	operacao* Job1MenorTempo;
-	Job1MenorTempo = NULL;
+	operacao* Job1MenorTempo = NULL;
 
-	operacao* Job2MenorTempo;
-	Job2MenorTempo = NULL;
+	operacao* Job2MenorTempo = NULL;
 
-	operacao* Job3MenorTempo;
-	Job3MenorTempo = NULL;
+	operacao* Job3MenorTempo = NULL;
 
-	operacao* Job4MenorTempo;
-	Job4MenorTempo = NULL;
+	operacao* Job4MenorTempo = NULL;
 
-	operacao* Job5MenorTempo;
-	Job5MenorTempo = NULL;
+	operacao* Job5MenorTempo = NULL;
 
-	operacao* Job6MenorTempo;
-	Job6MenorTempo = NULL;
+	operacao* Job6MenorTempo = NULL;
 
-	operacao* Job7MenorTempo;
-	Job7MenorTempo = NULL;
+	operacao* Job7MenorTempo = NULL;
 
-	operacao* Job8MenorTempo;
-	Job8MenorTempo = NULL;
+	operacao* Job8MenorTempo = NULL;
 	
 	//teste de estratégia para o escalonamento.
 	Job1MenorTempo = menorTempoOpe(listaOperacaoJob1);
@@ -272,11 +264,11 @@ int main() {
 	inserirOpenoJob(arvoreJobMenorTempo, Job1MenorTempo, 1);
 	inserirOpenoJob(arvoreJobMenorTempo, Job2MenorTempo, 2);
 	inserirOpenoJob(arvoreJobMenorTempo, Job3MenorTempo, 3);
-	inserirOpenoJob(arvoreJobMenorTempo, Job3MenorTempo, 4);
-	inserirOpenoJob(arvoreJobMenorTempo, Job3MenorTempo, 5);
-	inserirOpenoJob(arvoreJobMenorTempo, Job3MenorTempo, 6);
-	inserirOpenoJob(arvoreJobMenorTempo, Job3MenorTempo, 7);
-	inserirOpenoJob(arvoreJobMenorTempo, Job3MenorTempo, 8);
+	inserirOpenoJob(arvoreJobMenorTempo, Job4MenorTempo, 4);
+	inserirOpenoJob(arvoreJobMenorTempo, Job5MenorTempo, 5);
+	inserirOpenoJob(arvoreJobMenorTempo, Job6MenorTempo, 6);
+	inserirOpenoJob(arvoreJobMenorTempo, Job7MenorTempo, 7);
+	inserirOpenoJob(arvoreJobMenorTempo, Job8MenorTempo, 8);
 
 
 	#pragma endregion
