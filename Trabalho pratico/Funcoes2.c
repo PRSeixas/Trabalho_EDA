@@ -16,7 +16,11 @@
 
 #pragma region ManipulacaoDados
 
-//Função para gravar os dados das operações de um Job em um ficheiro txt
+/**
+ * .
+ * @brief Função para exportar dados da lista de operações.
+ * \param lista - endereço da lista de operações a exportar
+ */
 void gravarDadosFicheiro(operacao* lista) {
 
 	FILE* file;
@@ -60,7 +64,7 @@ void ficheiroArvoreInOrder(job* root)
 	if (root == NULL) return;
 	ficheiroArvoreInOrder(root->left);
 
-	file = fopen("trabalho.txt", "a");
+	file = fopen("ArvoreJobInOrder.txt", "a");
 	fprintf(file, "\nJob %d\n", root->cod);
 	fclose(file);
 
@@ -69,7 +73,7 @@ void ficheiroArvoreInOrder(job* root)
 	while (aux != NULL)
 	{
 		aux2 = aux;
-		file = fopen("trabalho.txt", "a");
+		file = fopen("ArvoreJobInOrder.txt", "a");
 		fprintf(file, "\n");
 		while (aux2->nextM != NULL)
 		{
@@ -84,6 +88,11 @@ void ficheiroArvoreInOrder(job* root)
 	ficheiroArvoreInOrder(root->right);
 }
 
+/**
+ * .
+ * @brief Função para exportar dados da árvore gerada com os menores tempos das operações.
+ * \param root
+ */
 void ficheiroArvoreMinimoTempo(job* root)
 {
 	FILE* file;
@@ -118,251 +127,166 @@ void ficheiroArvoreMinimoTempo(job* root)
 
 	ficheiroArvoreMinimoTempo(root->right);
 }
-#pragma endregion
 
+//Função em desenvolvimento
+/**
+ * .
+ * @brief Função para gerar arquivo tipo csv com os dados do planeamento gerado.
+ * \param p
+ */
+void gravaDadosPlaneamento(Cel p[][T])
+{
+	FILE* file;
+	int maq = 0;
+	int col = 0;
+	int maqAux = 0;
+	int t = 0;
 
-#pragma region FuncoesEmDesenvolvimento
+	//if (p[maq][col].idOpe == -1) return;
 
+	file = fopen("planeamento.csv", "a");
 
-//Listar Job com suas respectivas operações e Jobs
-//Função em desenvolvimento, corrigir pesquisa e apontador de Job para operações
-void listarJobCompleto(job* inicio, int codJob) {
-	
-	operacao* a = NULL;
-	
-	if (inicio->cod == NULL)
+	for (maq = 0; maq < 1; maq++)
 	{
-		printf("Lista de Jobs vazia");
-	}
-	else
-	{
-		if (inicio->cod == codJob)
+		fprintf(file, "---------- ,");
+		for (col = 0; col < T; col++)
 		{
-			a->nextOp = inicio->ope;
-
-			while (a->nextOp != NULL)
-			{
-				listarOpeComMaq(a);
-				a = a->nextOp;
-			}
+			t++;
+			fprintf(file, " T%d,", t);
 		}
+		fprintf(file, "\n");
 	}
-}
 
-//Função para calcular menor tempo disponível para efetuar um Job
-//Em desenvolvimento, corrigir erro de loop na verificação da lista de operações
-void ListarJobMenorTempo(operacao* lista) {
-	operacao* a = NULL;
-	operacao* auxNext = lista;
-	int menor = 0;
-	int menor2 = 0;
-	int cod = 4;
-	if (lista == NULL)
+	for (maq = 0; maq < M; maq++)
 	{
-		printf("Lista vazia");
-	}
-	while (lista->nextOp != NULL)
-	{
-		while (auxNext != NULL)
-		{
-			if (auxNext->cod == cod)
-			{
-				a = auxNext;
-			}
-			auxNext = auxNext->nextOp;
-		}
+		col = 0;
+		fprintf(file, "Máquina %d: ,", maq);
 
-		while (a->nextM != NULL && a->nextM->nextm != NULL)
-		{
-			if (a->nextM->und < a->nextM->nextm->und)
+		//for (int l = 0; l < M; l++)
+		for (int col = 0; col < T; col++) {
+			if (p[maq][col].idJob == -1)
 			{
-				menor = a->nextM->und;
-				//printf("%d %d\n", menor, a->nextM->cod);
+				fprintf(file, "     ,");
 			}
 			else
 			{
-				menor = a->nextM->nextm->und;
-				//printf("%d %d\n", menor, a->nextM->nextm->cod);
+				fprintf(file, "J%dO%d,", p[maq][col].idJob, p[maq][col].idOpe);
 			}
-			if (menor != 0 && menor2 == 0)
-			{
-				menor2 = menor;
-			}
-			if (menor < menor2)
-			{
-				menor2 = menor;
-			}
-			a = a->nextM;
 		}
-		printf("%d", menor2); //Apenas para teste de visualização
-		lista = lista->nextOp;
-		cod--;
+		fprintf(file, "\n");
 	}
-	/*
-	if (lista == NULL)
-	{
-		printf("Lista Vazia, sem operações para calcular tempo");
-	}
-	else
-	{
-		auxNext = lista;	
-		while (lista->nextOp != NULL)
-		{
-			
-			while (lista->nextOp->nextM != NULL)
-			{
+	fclose(file);
+
+}
+
+#pragma endregion
 
 
-				if (lista->nextM->und < auxNext->nextM->nextm->und)
-				{
-					menor = lista->nextM->und;
-					printf("%d\n", lista->nextM->cod);
-				}
-				else
-				{
-					menor = auxNext->nextM->nextm->und;
-					printf("%d\n", auxNext->nextM->nextm->cod);
-				}
-				lista->nextOp->nextM = lista->nextOp->nextM->nextm;
-			}
-			printf("%d\n", menor);
+#pragma region Escalonamento
 
-			lista = lista->nextOp;
+/**
+ * .
+ * @brief Função para iniciar e formatar a matriz para o escalonamento
+ * \param p
+ * \param codJob
+ * \param codOper
+ */
+void IniciaPlano(Cel p[][T], int codJob, int codOper) {
+
+	for (int l = 0; l < M; l++)
+		for (int col = 0; col < T; col++) {
+			p[l][col].idJob = codJob;
+			p[l][col].idOpe = codOper;
 		}
-	}*/
 }
 
+/**
+ * .
+ * @brief Função para verificar espaço livre que caiba a operação completa do Job na matriz
+ * \param p
+ * \param coluna
+ * \param tempototal
+ * \param maq
+ * \return 
+ */
+bool verificarEspaco(Cel p[][T], int coluna, int tempototal, int maq) {
 
-void gravarDadosFicheiro2(job* root) {
-
-	FILE* file;
-	job* auxLista = root;
-	operacao* aux = NULL;
-	operacao* aux2 = NULL;
-
-	if (root == NULL)
-	{
-		file = fopen("trabalho.txt", "w");
-		fprintf(file, "Lista vazia");
-	}
-	while (root != NULL)
-	{
-		aux = auxLista->ope;
-		file = fopen("trabalho.txt", "a");
-		fprintf(file, "Job %d\n", auxLista->cod);
-		fclose(file);
-
-		while (aux != NULL)
-		{
-			aux2 = aux;
-			file = fopen("trabalho.txt", "a");
-			fprintf(file, "\n");
-			while (aux2->nextM != NULL)
-			{
-				fprintf(file, "operação%d, máquina %d, tempo %d\n", aux->cod, aux2->nextM->cod, aux2->nextM->und);
-				aux2 = aux2->nextM;
-			}
-			aux = aux->nextOp;
-
-			fclose(file);
+	for (; coluna < tempototal; coluna++) {
+		if (p[maq][coluna].idJob != -1) {
+			return true;
 		}
-
-		auxLista = auxLista->left;
 	}
+	return false;
 }
 
-//Teste de funcionamento ok. Efetuar alocação na aba correspondente e comentar.
-job* lerFicheiroJobs(char* nomeFicheiro)
-{
-	FILE* fp;
-	job* root = NULL;
-	job* novo;
 
+//Função em desenvolvimento
+/**
+ * .
+ * @brief Função para escrever na matriz as opereçõs dos Jobs nas linhas das máquinas
+ * \param p
+ * \param nomeFicheiro
+ */
+void OcupaPlanoDados(Cel p[][T], char* nomeFicheiro) {
+
+	FILE* fp;
+	int codJob = 0;
+	int codOpe = 0;
+	int codMaq = 0;
+	int tempo = 0;
+	int colFim = 0;
+	int col = 0;
+	int auxJob = 0;
+
+	//Dados importados do ficheiro gerado com as operações de menor tempo do Job.
 	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
 
-	job auxJobs;
-	int z = 0;
-	char c[1000];
-	while (fscanf(fp, "%[^\n] ", c) != EOF) {
-		sscanf(c, "%d\n", &auxJobs.cod);
-
-		novo = criarJob(auxJobs.cod);
-		root = inserirJobArvore(root, novo);
-	}
-
-	fclose(fp);
-	return root;
-
-}
-
-//Teste de funcionamento ok. Efetuar alocação na aba correspondente e comentar
-operacao* lerFicheiroOperacao(char* nomeFicheiro)
-{
-	FILE* fp;
-	operacao* root = NULL;
-	operacao* novo;
-
-
-	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
-
-	operacao auxOpe;
-	char c[1000];
-	while (fscanf(fp, "%[^\n] ", c) != EOF) {
-		sscanf(c, "%d\n", &auxOpe.cod);
-
-		novo = CriarOperacao(auxOpe.cod);
-		root = inserirOpeInicio2(root, novo);
-	}
-
-	fclose(fp);
-	return root;
-}
-
-//Teste de funcionamento ok. Efetuar alocação na aba correspondente e comentar
-maquina* lerFicheiroMaquinas(char* nomeFicheiro, operacao* rootOpe)
-{
-	FILE* fp;
-	maquina* root = NULL;
-	maquina* nova;
-	int codOpe;
-
-	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
-
-	maquina auxMaq;
-	char c[1000];
-	while (fscanf(fp, "%[^\n] ", c) != EOF) {
-		sscanf(c, "%d\t%d\t%d\n", &codOpe, &auxMaq.cod, &auxMaq.und);
-
-		nova = CriarMaquina(auxMaq.cod, auxMaq.und);
-		InserirMaqnaOpe(rootOpe, codOpe, nova);
-	}
-
-	fclose(fp);
-	return;
-}
-
-//função em desenvolvimento
-dados* lerFicheiroDados(char* nomeFicheiro)
-{
-	FILE* fp;
-	dados* root = NULL;
-	dados* nova;
-	int codJob;
-	int codOpe;
-	int codMaq;
-	int tempo;
-
-	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
-	
-	dados auxDados;
+	dados aux;
 	char c[1000];
 	while (fscanf(fp, "%[^\n] ", c) != EOF)
 	{
-		sscanf(c, "%d\t%d\t%d\t%d\n", &auxDados.job, &auxDados.ope, &auxDados.maq, &auxDados.und);
+		sscanf(c, "%d\t%d\t%d\t%d\n", &aux.job, &aux.ope, &aux.maq, &aux.und);
 
+
+		//Fase 1: inicia depois da última operação.
+		if (auxJob == aux.job)
+		{
+			col = colFim;
+		}
+		else col = 0;
+
+		//Fase 2: Encontrar posição de inicio | percorre a linha até achar posição livre, pré definida como -1
+		while (p[aux.maq][col].idJob != -1)
+			col++;
+
+		//Fase 3 - Teste usando função para verificar espaço suficiente para escrever a operação inteira do Job.
+		int auxColFim = col + aux.und;
+	repeat:
+		colFim = col + aux.und;
+		if (verificarEspaco(p, col, colFim, aux.maq) == true) {
+			col++;			//espaço ocupado passa para a frente
+			colFim++;		// o total tambem tem de passar para a frente
+			goto repeat;	//Processo repete-se até teste devolver resultado falso, não há nada diferente de -1.
+		}
+		else
+		{
+			//Fase 4 - Ocupa a partir da posição livre encontrada
+
+			//Ciclo for para preencher a quantidade de colunas da respectiva operação
+			for (; col < colFim; col++) {
+				p[aux.maq][col].idJob = aux.job;
+				p[aux.maq][col].idOpe = aux.ope;
+			}
+		}
+		auxJob = aux.job;
 	}
-
 }
+
+#pragma endregion
+
+
+
+#pragma region FuncoesEmDesenvolvimento
 
 //Função em desenvolvimento
 //Verificar loop e funcionalidade
@@ -394,133 +318,5 @@ job* arvoreJobMin(job* root)
 	return novaLista;
 }
 
-//Função em desenvolvimento
-void IniciaPlano(Cel p[][T], int codJob, int codOper) {
-
-	for (int l = 0; l < M; l++)
-		for (int col = 0; col < T; col++) {
-			p[l][col].idJob = codJob;
-			p[l][col].idOpe = codOper;
-		}
-}
-
-//Função em desenvolvimento
-void OcupaVarios(Cel p[][T], int mId, int totTempo, Cel* c) {
-
-	//Fase 1: Procurar a primeira "casa" livre
-	int col = 0;
-	while (p[mId][col].idJob != -1)
-		col++;
-
-	//Fase 1 - Ocupa a partir da posição livre encontrada
-	totTempo += col;	//porquê?
-	for (; col < totTempo; col++) {
-		p[mId][col].idJob = c->idJob;
-		p[mId][col].idOpe = c->idOpe;
-		//p[mId][col] = *c;
-	}
-
-	//Fase 2 - Procurar quando a operação anterior
-
-	//Fase 3 - Verficar se após posição livre existe tempo suficiente...
-}
-
-//Função em desenvolvimento
-void OcupaPlanoDados(Cel p[][T], char* nomeFicheiro) {
-
-	FILE* fp;
-	int codJob = 0;
-	int codOpe = 0;
-	int codMaq = 0;
-	int tempo = 0;
-	int colFim = 0;
-	int col = 0;
-	int auxJob = 0;
-
-	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
-
-	dados aux;
-	char c[1000];
-	while (fscanf(fp, "%[^\n] ", c) != EOF)
-	{
-		sscanf(c, "%d\t%d\t%d\t%d\n", &aux.job, &aux.ope, &aux.maq, &aux.und);
-
-
-		//Fase 1: Procurar a primeira "casa" livre e inicia depois da última operação.
-		if (auxJob == aux.job)
-		{
-			col = colFim;
-		}
-		else col = 0;
-		
-		while (p[aux.maq][col].idJob != -1)
-			col++;
-
-		//Fase 2 - Verficar se após posição livre existe tempo suficiente...
-
-		//Fase 4 - Ocupa a partir da posição livre encontrada
-
-		colFim = col + aux.und;
-		for (; col < colFim; col++) {
-			p[aux.maq][col].idJob = aux.job;
-			p[aux.maq][col].idOpe = aux.ope;
-		}
-		auxJob = aux.job;
-	}
-}
-
-//Função em desenvolvimento
-void gravaDadosPlaneamento(Cel p[][T])
-{
-	FILE* file;
-	int maq = 0;
-	int col = 0;
-	int maqAux = 0;
-	int t = 0;
-
-	//if (p[maq][col].idOpe == -1) return;
-
-	file = fopen("planeamento.csv", "a");
-	/*
-	for (maq = 0; maq < 1; maq++)
-	{
-		fprintf(file, "---------- ");
-		for (col = 0; col < T; col++)
-		{
-			t++;
-			fprintf(file, " T%d", t);
-		}
-		fprintf(file, "\n");
-	}
-	*/
-	for (maq = 0; maq < M; maq++)
-	{
-		col = 0;
-		fprintf(file, "Máquina %d: ,", maq);
-
-		for (int l = 0; l < M; l++)
-			for (int col = 0; col < T; col++) {
-				if (p[maq][col].idJob == -1)
-				{
-					fprintf(file, "     ,");
-				}
-				else
-				{
-					fprintf(file, "J%dO%d,", p[maq][col].idJob, p[maq][col].idOpe);
-				}
-			}
-		/*
-		while (p[maq][col].idJob != -1 && col != T)
-		{
-			fprintf(file, " J%d O%d |", p[maq][col].idJob, p[maq][col].idOpe);
-			col++;	
-		}
-		*/
-
-		fprintf(file, "\n");
-	}
-	fclose(file);
-
-}
 #pragma endregion
 

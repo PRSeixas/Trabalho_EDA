@@ -37,9 +37,9 @@ typedef struct {
 
 //Estrutura para criar um novo espaço na memória para cadastro de operações
 typedef struct operacao {
-	int cod;
-	struct operacao* nextOp;
-	struct maquina* nextM;
+	int cod;				   //Código da operação
+	struct operacao* nextOp;   //Próxima operação
+	struct maquina* nextM;     //Início da lista de máquinas da operação
 }operacao;
 
 //Estrutura para iniciar a lista de operações
@@ -51,11 +51,11 @@ typedef struct {
 //Estrutura para criar job com o número do código de sua referência
 typedef struct job
 {
-	int cod;
-	struct job* nextJ;
-	struct job* left;
-	struct job* right;
-	struct operacao* ope;
+	int cod;                //Código do Job
+	struct job* nextJ;      //Apontador usado na primeira fase para lista ligada simples
+	struct job* left;       //Lado esquerdo da árvore
+	struct job* right;      //Lado direito da árvore
+	struct operacao* ope;   //Lista de operações do Job
 }job;
 
 //Lista inicial para Jobs
@@ -64,18 +64,20 @@ typedef struct {
 	int tam;
 }ListaJob, ListaJob1;
 
+//Struct para auxiliar no escalonamento com os dados a exportar, Job, Operação, Máquina e Tempo
 typedef struct dados
 {
-	int job;
-	int ope;
-	int maq;
-	int und;
+	int job;		//Código do Job
+	int ope;		//Código da operação
+	int maq;		//Código da máquina
+	int und;		//unidade de tempo
 }dados;
 
+//Struct usada na matriz do escalonamento para guardar os valores do Job e Operação a exportar para o ficheiro
 typedef struct Cel
 {
-	int idJob;
-	int idOpe;
+	int idJob;		//Código do Job que será impresso na matriz
+	int idOpe;		//Código da operação que será impresso na matriz
 }Cel;
 
 #pragma endregion
@@ -85,21 +87,26 @@ typedef struct Cel
 //Função para alocar memória e criar máquina
 maquina* CriarMaquina(int cod, int tempo);
  
+//Função para inserir máquina no início de uma lista
 maquina* inserirMaqInicio2(maquina* h, maquina* nova);
 
-//Função para inserir máquina no inicio da lista
-void inserirMaqInicio(ListaMaquina* lista, int valor, int tempo, int operacao, int job);
-
-//Função para inserir máquina no final da lista
-void inserirMaqFim(ListaMaquina* lista, int valor, int tempo, int operacao, int job);
-maquina* inserirMaqFim2(ListaMaquina* lista, int valor, int tempo, int operacao, int job);
-
 //Função para remover máquina da lista
-void RemoverMaq(ListaMaquina* lista, int valor);
 void RemoverMaq2(maquina* lista, int valor);
 
 //Função para percorrer lista e devolver máquina com menor tempo
 maquina* maquinaMenorTempo(maquina* lista);
+
+//Listar máquinas em ordem crescente
+void listarCrescenteMaq(maquina* inicio);
+
+//Função para inserir máquina no final da lista, usado na fase um apenas.
+maquina* inserirMaqFim2(ListaMaquina* lista, int valor, int tempo, int operacao, int job);
+
+//Função para imprimir uma lista simples de máquinas, usado na primeira fase apenas.
+void imprimirMaq2(maquina* lista);
+
+//Função para inserir máquinas na lista de operações a partir de um ficheiro.
+maquina* lerFicheiroMaquinas(char* nomeFicheiro, operacao* rootOpe);
 
 #pragma endregion
 
@@ -108,24 +115,41 @@ maquina* maquinaMenorTempo(maquina* lista);
 //Função para criar Job
 job* criarJob(int cod);
 
-
 //Função para inserir Job no início da estrutura
-void inserirJobInicio(ListaJob* lista, int valor);
 job* inserirJobInicio2(job* h, job* novo);
 
 //Função para inserir Job no final da estrutura
-void inserirJobFim(ListaJob* lista, int valor);
 job* inserirJobFim2(ListaJob* listaj, int valor);
 
-//Função para remover determinado Job da estrutura
+//Função para remover determinado Job de uma lista simples
 void RemoverJob(ListaJob* lista, int valor);
 
-//Função arvore de Job em teste
+//Função para inserir um Job em uma árvore binária
 job* inserirJobArvore(job* root, job* novo);
 
 //Função para procurar Job na árvore
 job* procurarJobArvore(job* root, int cod);
 
+//Função para inserir lista de operações de um Job na árvore de Jobs.
+job* inserirOpenoJob(job* listajob, operacao* listaOp, int codJob);
+
+//Gerar árvore de Jobs a partir de um ficheiro.
+job* lerFicheiroJobs(char* nomeFicheiro);
+
+//Função para imprimir uma lista de Jobs simples
+void listarCrescenteJob(job* listaj);
+
+//Função para imprimir a árvore de Jobs pre ordenada.
+void listarArvorePreOrder(job* root);
+
+//Função para imprimir a árvore de Jobs de forma ordenada
+void listarArvoreInOrder(job* root);
+
+//Função para imprmir a árvore completa com suas operações e máquinas.
+void listarArvoreJobOpeInOrder(job* root);
+
+//Função para imprmir lista simples de Jobs com as operações.
+void imprimirJob(ListaJob* listaj);
 #pragma endregion
 
 #pragma region StructFuncoesProcedimentosOperacoes
@@ -133,122 +157,64 @@ job* procurarJobArvore(job* root, int cod);
 //Função para criar operação
 operacao* CriarOperacao(int cod);
 
-//Função para inserir operações no inicio da lista
-void inserirOpeInicio(ListaOperacao* listaop, int valor);
-operacao* inserirOpeInicio2(operacao* h, operacao* nova);
-
-//Função para inserir operações sempre ao final da lista
+//Função para inserir operação no final de uma lista, usado apenas na primeira fase.
 void inserirOpeFim(ListaOperacao* listaOp, int valor);
+
+//Função para inserir operações no inicio da lista
+operacao* inserirOpeInicio2(operacao* h, operacao* nova);
 
 //Função para remover operações da lista
 void removerOpe(ListaOperacao* listaop, int valor);
 
-//Imprimir relação de operações cadastradas
-void imprimirOp(ListaOperacao* listaOp);
-void listarCrescenteOpe(operacao* inicio);
-
 //Função para procurar operação na lista original de operações
 operacao* procurarOp(operacao* listaOperacao, int cod);
-
-//Inserir lista de operação na lista de Job
-job* inserirOpenoJob(job* listajob, operacao* listaOp, int codJob);
-
-//Cria lista auxiliar com as máquinas de menor tempo de um Job
-operacao* menorTempoOpe(operacao* lista);
 
 //Inserir máquina na lista de operação
 void InserirMaqnaOpe(operacao* h, int codOp, maquina* nova);
 
+//Cria lista auxiliar com as máquinas de menor tempo de um Job
+operacao* menorTempoOpe(operacao* lista);
+
+//Imprimir lista de operações
+void listarCrescenteOpe(operacao* inicio);
+
 //Listar operações e suas máquinas cadastradas
 void listarOpeComMaq(operacao* inicio);
 
-
-
-#pragma endregion
-
-#pragma region	ProcedimentosImpressoes
-
-//Imprimir relação de máquinas cadastradas
-void imprimirMaq(ListaMaquina* lista);
-void imprimirMaq2(maquina* lista);
-
-//Imprimir relação de Jobs cadastrados
-void imprimirJob(ListaJob* listaj);
-
-//Imprimir lista de determinado Job com suas operações e máquinas cadastrados.
-void imprimirListaPorJob(ListaMaquina* lista, int j);
-
-//Imprimir árvore de Jobs Pre Order
-void listarArvorePreOrder(job* root);
-
-//Imprimir árvore de Jobs InOrder
-void listarArvoreInOrder(job* root);
-
-//Imprimir árvore de Jobs com operações e máquinas In Order
-void listarArvoreJobOpeInOrder(job* root);
+//Função para montar lista de operações a partir de um ficheiro
+operacao* lerFicheiroOperacao(char* nomeFicheiro);
 
 #pragma endregion
 
 #pragma region ManipulacaoDados
 
+//Exporta dados de uma lista de operações
 void gravarDadosFicheiro(operacao* lista);
+
+//Exporta dados completo da árvore de Job para um ficheiro
+void ficheiroArvoreInOrder(job* root);
+
+//Exporta dados da árvore gerada com os menores tempos das operações.
+void ficheiroArvoreMinimoTempo(job* root);
+
+//Função para gerar arquivo tipo csv com os dados do planeamento gerado.
+void gravaDadosPlaneamento(Cel p[][T]);
+
+#pragma endregion
+
+#pragma region Escalonamento
+
+//Função para iniciar e formatar a matriz para o escalonamento
+void IniciaPlano(Cel p[][T], int codJob, int codOper);
+
+//Função para verificar espaço livre que caiba a operação completa do Job na matriz
+bool verificarEspaco(Cel p[][T], int coluna, int tempototal, int maq);
+
+//Função para escrever na matriz as opereçõs dos Jobs nas linhas das máquinas
+void OcupaPlanoDados(Cel p[][T], char* nomeFicheiro);
 
 #pragma endregion
 
 #pragma region FuncoesEmTestes
 
-void montarListaJobs(ListaMaquina* lista, ListaMaquina* listaaux, int j);
-
-//Funções e procedimentos em testes
-void imprimirRelatorioJob(ListaJob* listaj, ListaMaquina* lista, ListaOperacao* listaOp, int valor);
-maquina* copiarbloco(ListaMaquina* lista);
-
-//Listar Job com suas respectivas operações e Jobs
-//Função em desenvolvimento, corrigir pesquisa e apontador de Job para operações
-void listarJobCompleto(job* inicio, int codJob);
-
-//Função para calcular menor tempo disponível para efetuar um Job
-//Em desenvolvimento, corrigir erro de loop na verificação da lista de operações
-void ListarJobMenorTempo(operacao* lista);
-
-
-void gravarDadosFicheiro2(operacao* lista);
-
-
-void ficheiroArvoreInOrder(job* root);
-
-//Teste de função para ler e montar árvore de Jobs do ficheiro. Teste ok.
-job* lerFicheiroJobs(char* nomeFicheiro);
-
-//Teste de função para ler e montar a lista de operações de um determinado Job.
-operacao* lerFicheiroOperacao(char* nomeFicheiro);
-
-
-maquina* lerFicheiroMaquinas(char* nomeFicheiro, operacao* rootOpe);
-
-//teste de estratégia de escalonamento
-void ficheiroArvoreMinimoTempo(job* root);
-
-void IniciaPlano(Cel p[][T], int codJob, int codOper);
-
-void OcupaVarios(Cel p[][T], int mId, int totTempo, Cel* c);
-
-void OcupaPlanoDados(Cel p[][T], char* nomeFicheiro);
-
-void gravaDadosPlaneamento(Cel p[][T]);
-#pragma endregion
-
-
-#pragma region CodigosProfessorJoao
-//Listar máquinas em ordem decrescente
-void listarDecrescenteMaq(maquina* lista);
-
-//Listar máquinas em ordem crescente
-void listarCrescenteMaq(maquina* inicio);
-
-//Listar Jobs em ordem crescente
-void listarCrescenteJob(job* listaj);
-
-maquina* inserirInicioM(maquina* inicio, int cod, int tempo, int operacao, int job);
-job* inserirInicioJ(job* head, int cod);
 #pragma endregion

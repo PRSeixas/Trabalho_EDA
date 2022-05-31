@@ -19,9 +19,11 @@
 #pragma region Jobs
 
 /**
-*@brief aloca espaço de memória e cria um novo Job
-* @param [in] int cod	            código do número do Job
-*/
+ * .
+ * @brief aloca espaço de memória e cria um novo Job
+ * \param cod
+ * \return 
+ */
 job* criarJob(int cod) {
 	job* novo = (job*)malloc(sizeof(job));
 	novo->cod = cod;
@@ -34,10 +36,12 @@ job* criarJob(int cod) {
 }
 
 /**
-*@brief função para inserir Job no inicio da lista
-* @param [in] endereço da lista de Jobs
-* @param [in] endereço de memória do novo Job com seus dados
-*/
+ * .
+ * @brief Função para inserir Job no início da lista.
+ * \param h
+ * \param novo
+ * \return 
+ */
 job* inserirJobInicio2(job* h, job* novo) {
 	if (h == NULL)
 	{
@@ -50,7 +54,79 @@ job* inserirJobInicio2(job* h, job* novo) {
 	}
 }
 
-//Inserir Job em uma árvore binária
+/**
+ * .
+ * @brief Função para inserir Job no final de uma lista.
+ * \param listaj
+ * \param valor
+ * \return 
+ */
+job* inserirJobFim2(ListaJob* listaj, int valor) {
+	job* novo = (job*)malloc(sizeof(job));
+	job* aux = (job*)malloc(sizeof(job));
+	novo->cod = valor;
+	novo->nextJ = NULL;
+	novo->ope = NULL;
+
+	if (listaj->inicio == NULL)
+	{
+		listaj->inicio = novo;
+	}
+	else
+	{
+		aux->nextJ = listaj->inicio;
+		while (aux->nextJ != NULL)
+		{
+			aux = aux->nextJ;
+		}
+		aux->nextJ = novo;
+		listaj->tam++;
+	}
+};
+
+/**
+ * .
+ * @brief Função para remover um Job de uma lista simples
+ * \param listaj
+ * \param valor
+ */
+void RemoverJob(ListaJob* listaj, int valor) {
+	job* inicio = (job*)malloc(sizeof(job));
+	job* jobremover = NULL;
+
+	inicio->nextJ = listaj->inicio;
+
+	if (inicio != NULL && listaj->inicio->cod == valor)
+	{
+		jobremover = listaj->inicio;
+		listaj->inicio = jobremover->nextJ;
+	}
+	else
+	{
+		while (inicio != NULL && inicio->nextJ != NULL && inicio->nextJ->cod != valor)
+		{
+			inicio = inicio->nextJ;
+		}
+		if (inicio != NULL && inicio->nextJ != NULL)
+		{
+			jobremover = inicio->nextJ;
+			inicio->nextJ = jobremover->nextJ;
+		}
+	};
+	if (jobremover != NULL)
+	{
+		free(jobremover);
+		//listaj->tam--;
+	}
+};
+
+/**
+ * .
+ * @brief Função para inserir um Job em uma árvore binária
+ * \param root
+ * \param novo
+ * \return 
+ */
 job* inserirJobArvore(job* root, job* novo) {
 	if (root == NULL)
 	{
@@ -73,8 +149,13 @@ job* inserirJobArvore(job* root, job* novo) {
 	return root;
 }
 
-//Procurar Job em uma árvore binária
-//Função em desenvolvimento e teste
+/**
+ * .
+ * @brief Função para procurar um Job em uma árvore binária
+ * \param root
+ * \param cod
+ * \return 
+ */
 job* procurarJobArvore(job* root, int cod) {
 	if (root == NULL)
 	{
@@ -93,11 +174,13 @@ job* procurarJobArvore(job* root, int cod) {
 }
 
 /**
-*@brief Inserir lista de operações em um determinado Job
-* @param [in] endereço da árvore de Jobs
-* @param [in] endereço da lista de operações de um Job
-* @param [in] int codJob, código do Job para pesquisar na lista o bloco de memória do Job correspondente da lista de operações
-*/
+ * .
+ * @brief Função para inserir lista de operações de um Job na árvore de Jobs.
+ * \param listajob
+ * \param listaOp
+ * \param codJob
+ * \return 
+ */
 job* inserirOpenoJob(job* listajob, operacao* listaOp, int codJob) {
 	job* a = NULL;
 	job* aux = NULL;
@@ -122,9 +205,39 @@ job* inserirOpenoJob(job* listajob, operacao* listaOp, int codJob) {
 }
 
 /**
-*@brief função para lisar Jobs cadastrados
-* @param [in] endereço da lista de Jobs
-*/
+ * .
+ * @brief Gerar árvore de Jobs a partir de um ficheiro.
+ * \param nomeFicheiro
+ * \return 
+ */
+job* lerFicheiroJobs(char* nomeFicheiro)
+{
+	FILE* fp;
+	job* root = NULL;
+	job* novo;
+
+	if ((fp = fopen(nomeFicheiro, "r")) == NULL) return NULL;
+
+	job auxJobs;
+	int z = 0;
+	char c[1000];
+	while (fscanf(fp, "%[^\n] ", c) != EOF) {
+		sscanf(c, "%d\n", &auxJobs.cod);
+
+		novo = criarJob(auxJobs.cod);
+		root = inserirJobArvore(root, novo);
+	}
+
+	fclose(fp);
+	return root;
+
+}
+
+/**
+ * .
+ * @brief Função para imprimir uma lista de Jobs simples
+ * \param listaj
+ */
 void listarCrescenteJob(job* listaj)
 {
 	if (listaj != NULL)
@@ -134,7 +247,11 @@ void listarCrescenteJob(job* listaj)
 	}
 }
 
-//Listar jobs da árvore Pre Order
+/**
+ * .
+ * @brief Função para imprimir a árvore de Jobs pre ordenada.
+ * \param root
+ */
 void listarArvorePreOrder(job* root)
 {
 	if (root == NULL) return;
@@ -143,7 +260,11 @@ void listarArvorePreOrder(job* root)
 	listarArvorePreOrder(root->right);
 }
 
-//Listar jobs da árvore In Order
+/**
+ * .
+ * @brief Função para imprimir a árvore de Jobs de forma ordenada
+ * \param root
+ */
 void listarArvoreInOrder(job* root)
 {
 	if (root == NULL) return;
@@ -152,7 +273,11 @@ void listarArvoreInOrder(job* root)
 	listarArvoreInOrder(root->right);
 }
 
-//Listar jobs da árvore com as operações e máquinas
+/**
+ * .
+ * @brief Função para imprmir a árvore completa com suas operações e máquinas.
+ * \param root
+ */
 void listarArvoreJobOpeInOrder(job* root)
 {
 	if (root == NULL) return;
@@ -160,6 +285,31 @@ void listarArvoreJobOpeInOrder(job* root)
 	printf("Job %d\n", root->cod);
 	listarOpeComMaq(root->ope);
 	listarArvoreJobOpeInOrder(root->right);
+}
+
+/**
+	@brief Procedimento para imprimir e visualizar a lista cadastrada de Jobs.
+	@param endereço de "listaj"
+	*/
+/**
+ * .
+ * @brief Função para imprmir lista simples de Jobs com as operações.
+ * \param listaj
+ */
+void imprimirJob(ListaJob* listaj) {
+	job* inicio = listaj->inicio;
+	printf("O tamanho da lista e %d\n", listaj->tam);
+	while (inicio != NULL)
+	{
+		printf("Job %d\n", inicio->cod);
+		inicio = inicio->nextJ;
+		if (listaj->inicio->ope != NULL)
+		{
+			printf("As operações desse Jobs são: %d", inicio->ope);
+			inicio = inicio->ope;
+		}
+	}
+	printf("\n");
 }
 
 #pragma endregion

@@ -17,47 +17,15 @@ int main() {
 	setlocale(LC_ALL, "Portuguese");
 
 	/**
-	* @brief Operações para criar uma nova máquina com seus parâmetros
-	*/
-	#pragma region CriarMaquina
-	/**
-	* @param [in] endereço listaInicio		Inicio da Lista
-	*/
-	maquina* listaInicio;
-	listaInicio = NULL;
-
-	/**
-	* @brief Criar nova máquina para posterior inserção em lista de operações
-	* @param [in] código da máquina
-	* @param [in] unidade de tempo
-	*/
-	
-	maquina* nova;
-	nova = CriarMaquina(1, 4);
-	listaInicio = inserirMaqInicio2(listaInicio, nova);
-
-	//printf("Listagem teste de inserção de máquina\n");
-	//listarCrescenteMaq(listaInicio);
-	
-	#pragma endregion
-
-	/**
 	* @brief Operações para criar um novo Job
 	*/
 	#pragma region ListaJobs
-	/**
-	 * .
-	 * @param inicio da árvore de Jobs
-	 * \return 
-	 */
+	
+	//Inicio da árvore de Jobs
 	job* arvoreJobInicioFicheiro = NULL;
 	job* arvoreJobMenorTempo = NULL;
 
-	/**
-	 * .
-	 * @param ficheiro com os dados dos Jobs
-	 * \return 
-	 */
+	//Montagem da árvore a partir do dados de um ficheiro
 	arvoreJobInicioFicheiro = lerFicheiroJobs("jobs.txt");
 	arvoreJobMenorTempo = lerFicheiroJobs("jobs.txt");
 
@@ -69,12 +37,7 @@ int main() {
 	*/
 	#pragma region ListaOperacoes
 
-	/**
-	 * .
-	 * @param lista de operações de um determinado Job
-	 * @param ficheiro com os dados das operações de um determinado Job
-	 * \return 
-	 */
+	//Montagem das listas de operações dos Jobs a partir de um ficheiro
 	operacao* listaOperacaoJob1 = NULL;
 	listaOperacaoJob1 = lerFicheiroOperacao("operacoes//operacoesJob1.txt");
 
@@ -103,115 +66,61 @@ int main() {
 
 
 	/**
-	* @brief Operações para inserir máquinas nas operações
+	* @brief Operações para inserir as informações das máquinas de um ficheiro nas listas de operações
 	*/
 	#pragma region InserirMaquinasOperacoes
 
-	/**
-	 * .
-	 * Inserir informações de máquinas de um ficheiro para uma lista de operações
-	 * \return 
-	 */
-
+	//Acrescentar máquinas nas listas de operações de um determinado Job
 	#pragma region MaquinasJob1
 
-	/**
-	 * .
-	 * @param ficheiro com os dados das máquinas para operações do Job1
-	 * @param lista de operações do Job1
-	 * \return 
-	 */
 	lerFicheiroMaquinas("maquinas//maquinasJob1.txt", listaOperacaoJob1);
-
 	#pragma endregion
 
 	#pragma region MaquinasJob2
 
-	/**
-	 * .
-	 * @param ficheiro com os dados das máquinas para operações do Job2
-	 * @param lista de operações do Job2
-	 * \return 
-	 */
 	lerFicheiroMaquinas("maquinas//maquinasJob2.txt", listaOperacaoJob2);
-	
 	#pragma endregion
 
 	#pragma region MaquinasJob3
 
-	/**
-	 * .
-	 * @param ficheiro com os dados das máquinas para operações do Job3
-	 * @param lista de operações do Job3
-	 * \return 
-	 */
 	lerFicheiroMaquinas("maquinas//maquinasJob3.txt", listaOperacaoJob3);
-
 	#pragma endregion
 
 	#pragma region MaquinasJob4
 
-	/**
-	 * .
-	 * @param ficheiro com os dados das máquinas para operações do Job4
-	 * @param lista de operações do Job4
-	 * \return 
-	 */
 	lerFicheiroMaquinas("maquinas//maquinasJob4.txt", listaOperacaoJob4);
-
 	#pragma endregion
 
 	#pragma region MaquinasJob5
 
-	/**
-	 * .
-	 * @param ficheiro com os dados das máquinas para operações do Job5
-	 * @param lista de operações do Job5
-	 * \return 
-	 */
 	lerFicheiroMaquinas("maquinas//maquinasJob5.txt", listaOperacaoJob5);
-
 	#pragma endregion
 
 	#pragma region MaquinasJob6
 
-	/**
-	 * .
-	 * @param ficheiro com os dados das máquinas para operações do Job6
-	 * @param lista de operações do Job6
-	 * \return 
-	 */
 	lerFicheiroMaquinas("maquinas//maquinasJob6.txt", listaOperacaoJob6);
-
 	#pragma endregion
 
 	#pragma region MaquinasJob7
 
-	/**
-	 * .
-	 * @param ficheiro com os dados das máquinas para operações do Job7
-	 * @param lista de operações do Job7
-	 * \return 
-	 */
 	lerFicheiroMaquinas("maquinas//maquinasJob7.txt", listaOperacaoJob7);
-
 	#pragma endregion
 
 	#pragma region MaquinasJob8
 
+	lerFicheiroMaquinas("maquinas//maquinasJob8.txt", listaOperacaoJob8);
+	#pragma endregion
+
+	#pragma endregion
+
 	/**
 	 * .
-	 * @param ficheiro com os dados das máquinas para operações do Job8
-	 * @param lista de operações do Job8
+	 * @brief Inserção das listas de operações no seu Job correspondente
 	 * \return 
 	 */
-	lerFicheiroMaquinas("maquinas//maquinasJob8.txt", listaOperacaoJob8);
-
-	#pragma endregion
-
-	#pragma endregion
-
 	#pragma region InserirOperacoesJobs
+
+	//Inserir as lists de operações montadas nos Jobs
 	inserirOpenoJob(arvoreJobInicioFicheiro, listaOperacaoJob1, 1);
 	inserirOpenoJob(arvoreJobInicioFicheiro, listaOperacaoJob2, 2);
 	inserirOpenoJob(arvoreJobInicioFicheiro, listaOperacaoJob3, 3);
@@ -221,27 +130,18 @@ int main() {
 	inserirOpenoJob(arvoreJobInicioFicheiro, listaOperacaoJob7, 7);
 	inserirOpenoJob(arvoreJobInicioFicheiro, listaOperacaoJob8, 8);
 
-	#pragma endregion
-
 	#pragma region JobMenorTempo
 
+	//Listas de operações que receberão as máquinas com menor tempo
 	operacao* Job1MenorTempo = NULL;
-
 	operacao* Job2MenorTempo = NULL;
-
 	operacao* Job3MenorTempo = NULL;
-
 	operacao* Job4MenorTempo = NULL;
-
 	operacao* Job5MenorTempo = NULL;
-
 	operacao* Job6MenorTempo = NULL;
-
 	operacao* Job7MenorTempo = NULL;
-
 	operacao* Job8MenorTempo = NULL;
 	
-	//teste de estratégia para o escalonamento.
 	Job1MenorTempo = menorTempoOpe(listaOperacaoJob1);
 	Job2MenorTempo = menorTempoOpe(listaOperacaoJob2);
 	Job3MenorTempo = menorTempoOpe(listaOperacaoJob3);
@@ -250,17 +150,8 @@ int main() {
 	Job6MenorTempo = menorTempoOpe(listaOperacaoJob6);
 	Job7MenorTempo = menorTempoOpe(listaOperacaoJob7);
 	Job8MenorTempo = menorTempoOpe(listaOperacaoJob8);
-	/*
-	listarOpeComMaq(Job1MenorTempo);
-	listarOpeComMaq(Job2MenorTempo);
-	listarOpeComMaq(Job3MenorTempo);
-	listarOpeComMaq(Job4MenorTempo);
-	listarOpeComMaq(Job5MenorTempo);
-	listarOpeComMaq(Job6MenorTempo);
-	listarOpeComMaq(Job7MenorTempo);
-	listarOpeComMaq(Job8MenorTempo);
-	*/
 
+	//Árvore de jobs atualizada com as máquinas com menor tempo em cada operação.
 	inserirOpenoJob(arvoreJobMenorTempo, Job1MenorTempo, 1);
 	inserirOpenoJob(arvoreJobMenorTempo, Job2MenorTempo, 2);
 	inserirOpenoJob(arvoreJobMenorTempo, Job3MenorTempo, 3);
@@ -270,27 +161,43 @@ int main() {
 	inserirOpenoJob(arvoreJobMenorTempo, Job7MenorTempo, 7);
 	inserirOpenoJob(arvoreJobMenorTempo, Job8MenorTempo, 8);
 
+	#pragma endregion
 
 	#pragma endregion
 
+	/**
+	 * .
+	 * @brief Exporta ficheiros com os dados gerados a partir da árvore de Jobs.
+	 * \return 
+	 */
 	#pragma region ManipulacaoDados
 
-	//Teste ok
-	//ficheiroArvoreInOrder(arvoreJobInicioFicheiro);
-	//Teste para estratégia de escalonamento
+	//Exportar ficheiro com a informação completa da árvore de Jobs.
+	ficheiroArvoreInOrder(arvoreJobInicioFicheiro);
+
+	//Exportar ficheiro com a informação das operações com menor tempo de execução.
 	ficheiroArvoreMinimoTempo(arvoreJobMenorTempo);
 
+	#pragma endregion
+
+	/**
+	 * .
+	 * @brief Planeamento da execução das operações com as máquinas de menor tempo.
+	 * \return 
+	 */
 	#pragma region Planeamento
 
-	Cel plano[M][T];
+	Cel plano[M][T];  //Declaração da matriz que receberá o planeamento da execução dos Jobs.
 
+	//Inicialização da matriz com todos os valores -1, servirá de parâmetro.
 	IniciaPlano(plano, -1, -1);
 
+	//Preenchimento da matriz com os dados gerados pela árvore de Jobs com os menores tempos nas operações.
 	OcupaPlanoDados(plano, "jobMinimo.txt");
 
+	//Exportar matriz preenchida para um arquivo do tipo "csv"
 	gravaDadosPlaneamento(plano);
 
 	#pragma endregion
 	
-	#pragma endregion
 }
