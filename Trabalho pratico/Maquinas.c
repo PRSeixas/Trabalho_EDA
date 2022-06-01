@@ -148,8 +148,8 @@ maquina* inserirMaqFim2(ListaMaquina* lista, int valor, int tempo, int operacao,
 	maquina* aux = (maquina*)malloc(sizeof(maquina));
 	novo->cod = valor;             //Valor do código da nova máquina
 	novo->und = tempo;             //Valor de unidade de tempo
-	novo->op = operacao;           //Valor da operação cadastrada
-	novo->job = job;               //Valor do job pertencente
+	//novo->op = operacao;           //Valor da operação cadastrada
+	//novo->job = job;               //Valor do job pertencente
 	novo->nextm = NULL;            //Novo bloco aponta para NULL pois encontra-se no final da lista.
 
 	if (lista->inicio == NULL) {
@@ -177,8 +177,8 @@ void imprimirMaq2(maquina* lista) {
 	{
 		printf("Maquina %d\n", inicio->cod);
 		printf("Unidade de tempo %d\n", inicio->und);
-		printf("Operação a que pertence:%d\n", inicio->op);
-		printf("Job a que pertence:%d\n\n", inicio->job);
+		//printf("Operação a que pertence:%d\n", inicio->op);
+		//printf("Job a que pertence:%d\n\n", inicio->job);
 		inicio = inicio->nextm;
 	}
 	printf("\n");

@@ -16,16 +16,17 @@
 #define M 9
 #define T 75
 
-
+/**
+ * .
+ * @brief Estruturas para Máquinas, Jobs, Operações e dados.
+ */
 #pragma region Structs
 
-//Estrutura para criar máquinas com o número do código de sua referência e seus parâmetros
+//Estrutura para criar máquinas com o número do código de sua referência e seu parâmetro de tempo
 typedef struct maquina
 {
 	int cod;       //código da máquina
 	int und;       //unidade de tempo
-	int op;        //bloco de operação
-	int job;       //Lista de Job a atribuir.
 	struct maquina* nextm;
 }maquina;
 
@@ -82,6 +83,10 @@ typedef struct Cel
 
 #pragma endregion
 
+/**
+ * .
+ * @brief Assinaturas dos métodos de máquinas
+ */
 #pragma region FuncoesProcedimentosMaquinas
 
 //Função para alocar memória e criar máquina
@@ -110,6 +115,10 @@ maquina* lerFicheiroMaquinas(char* nomeFicheiro, operacao* rootOpe);
 
 #pragma endregion
 
+/**
+ * .
+ * @brief Assinaturas dos métodos de Jobs
+ */
 #pragma region StructFuncoesProcedimentosJobs
 
 //Função para criar Job
@@ -152,6 +161,10 @@ void listarArvoreJobOpeInOrder(job* root);
 void imprimirJob(ListaJob* listaj);
 #pragma endregion
 
+/**
+ * .
+ * @brief Assinaturas dos métodos de Operações
+ */
 #pragma region StructFuncoesProcedimentosOperacoes
 
 //Função para criar operação
@@ -186,6 +199,10 @@ operacao* lerFicheiroOperacao(char* nomeFicheiro);
 
 #pragma endregion
 
+/**
+ * .
+ * @brief Assinaturas dos métodos da manipulação de dados
+ */
 #pragma region ManipulacaoDados
 
 //Exporta dados de uma lista de operações
@@ -202,6 +219,10 @@ void gravaDadosPlaneamento(Cel p[][T]);
 
 #pragma endregion
 
+/**
+ * .
+ * @brief Assinaturas dos métodos do escalonamento e planeamento
+ */
 #pragma region Escalonamento
 
 //Função para iniciar e formatar a matriz para o escalonamento
@@ -215,6 +236,10 @@ void OcupaPlanoDados(Cel p[][T], char* nomeFicheiro);
 
 #pragma endregion
 
+/**
+ * .
+ * @brief Assinaturas para testes de funções em desenvolvimento
+ */
 #pragma region FuncoesEmTestes
 
 #pragma endregion

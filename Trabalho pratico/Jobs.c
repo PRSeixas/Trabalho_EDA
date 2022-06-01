@@ -125,7 +125,7 @@ void RemoverJob(ListaJob* listaj, int valor) {
  * @brief Função para inserir um Job em uma árvore binária
  * \param root
  * \param novo
- * \return 
+ * \return root
  */
 job* inserirJobArvore(job* root, job* novo) {
 	if (root == NULL)
@@ -287,10 +287,6 @@ void listarArvoreJobOpeInOrder(job* root)
 	listarArvoreJobOpeInOrder(root->right);
 }
 
-/**
-	@brief Procedimento para imprimir e visualizar a lista cadastrada de Jobs.
-	@param endereço de "listaj"
-	*/
 /**
  * .
  * @brief Função para imprmir lista simples de Jobs com as operações.

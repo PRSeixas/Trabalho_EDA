@@ -54,17 +54,19 @@ void gravarDadosFicheiro(operacao* lista) {
  * 
  * \param root - endereço da árvore
  */
+
 void ficheiroArvoreInOrder(job* root)
 {
 	FILE* file;
 	job* auxLista = root;
 	operacao* aux = NULL;
-	operacao* aux2 = NULL;
+	//operacao* aux2 = NULL;
+	maquina* aux2 = NULL;
 
 	if (root == NULL) return;
 	ficheiroArvoreInOrder(root->left);
 
-	file = fopen("ArvoreJobInOrder.txt", "a");
+	file = fopen("ProcessPlanCompleto.txt", "a");
 	fprintf(file, "\nJob %d\n", root->cod);
 	fclose(file);
 
@@ -72,13 +74,13 @@ void ficheiroArvoreInOrder(job* root)
 
 	while (aux != NULL)
 	{
-		aux2 = aux;
-		file = fopen("ArvoreJobInOrder.txt", "a");
+		aux2 = aux->nextM;
+		file = fopen("ProcessPlanCompleto.txt", "a");
 		fprintf(file, "\n");
-		while (aux2->nextM != NULL)
+		while (aux2 != NULL)
 		{
-			fprintf(file, "operação %d, máquina %d, tempo %d\n", aux->cod, aux2->nextM->cod, aux2->nextM->und);
-			aux2 = aux2->nextM;
+			fprintf(file, "operação %d, máquina %d, tempo %d\n", aux->cod, aux2->cod, aux2->und);
+			aux2 = aux2->nextm;
 		}
 		aux = aux->nextOp;
 
@@ -87,6 +89,7 @@ void ficheiroArvoreInOrder(job* root)
 
 	ficheiroArvoreInOrder(root->right);
 }
+
 
 /**
  * .
@@ -98,7 +101,8 @@ void ficheiroArvoreMinimoTempo(job* root)
 	FILE* file;
 	job* auxLista = root;
 	operacao* aux = NULL;
-	operacao* aux2 = NULL;
+	//operacao* aux2 = NULL;
+	maquina* aux2 = NULL;
 
 	if (root == NULL) return;
 	ficheiroArvoreMinimoTempo(root->left);
@@ -111,13 +115,13 @@ void ficheiroArvoreMinimoTempo(job* root)
 
 	while (aux != NULL)
 	{
-		aux2 = aux;
+		aux2 = aux->nextM;
 		file = fopen("jobMinimo.txt", "a");
 		
-		while (aux2->nextM != NULL)
+		while (aux2 != NULL)
 		{
-			fprintf(file, "%d\t%d\t%d\t%d\t",auxLista->cod, aux->cod, aux2->nextM->cod, aux2->nextM->und);
-			aux2 = aux2->nextM;
+			fprintf(file, "%d\t%d\t%d\t%d\t",auxLista->cod, aux->cod, aux2->cod, aux2->und);
+			aux2 = aux2->nextm;
 			fprintf(file, "\n");
 		}
 		aux = aux->nextOp;
@@ -219,8 +223,6 @@ bool verificarEspaco(Cel p[][T], int coluna, int tempototal, int maq) {
 	return false;
 }
 
-
-//Função em desenvolvimento
 /**
  * .
  * @brief Função para escrever na matriz as opereçõs dos Jobs nas linhas das máquinas
@@ -230,10 +232,6 @@ bool verificarEspaco(Cel p[][T], int coluna, int tempototal, int maq) {
 void OcupaPlanoDados(Cel p[][T], char* nomeFicheiro) {
 
 	FILE* fp;
-	int codJob = 0;
-	int codOpe = 0;
-	int codMaq = 0;
-	int tempo = 0;
 	int colFim = 0;
 	int col = 0;
 	int auxJob = 0;
@@ -274,8 +272,8 @@ void OcupaPlanoDados(Cel p[][T], char* nomeFicheiro) {
 
 			//Ciclo for para preencher a quantidade de colunas da respectiva operação
 			for (; col < colFim; col++) {
-				p[aux.maq][col].idJob = aux.job;
-				p[aux.maq][col].idOpe = aux.ope;
+				p[aux.maq][col].idJob = aux.job;		//escrita do código do Job lido e armazenado em aux
+				p[aux.maq][col].idOpe = aux.ope;		//escrita do código da operação lida e armazenada em aux
 			}
 		}
 		auxJob = aux.job;
@@ -287,7 +285,7 @@ void OcupaPlanoDados(Cel p[][T], char* nomeFicheiro) {
 
 
 #pragma region FuncoesEmDesenvolvimento
-
+/*
 //Função em desenvolvimento
 //Verificar loop e funcionalidade
 job* arvoreJobMin(job* root)
@@ -317,6 +315,6 @@ job* arvoreJobMin(job* root)
 
 	return novaLista;
 }
-
+*/
 #pragma endregion
 

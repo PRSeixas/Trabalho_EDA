@@ -130,6 +130,9 @@ int main() {
 	inserirOpenoJob(arvoreJobInicioFicheiro, listaOperacaoJob7, 7);
 	inserirOpenoJob(arvoreJobInicioFicheiro, listaOperacaoJob8, 8);
 
+	//Exportar ficheiro com a informação completa da árvore de Jobs.
+	ficheiroArvoreInOrder(arvoreJobInicioFicheiro);
+
 	#pragma region JobMenorTempo
 
 	//Listas de operações que receberão as máquinas com menor tempo
@@ -172,8 +175,7 @@ int main() {
 	 */
 	#pragma region ManipulacaoDados
 
-	//Exportar ficheiro com a informação completa da árvore de Jobs.
-	ficheiroArvoreInOrder(arvoreJobInicioFicheiro);
+	
 
 	//Exportar ficheiro com a informação das operações com menor tempo de execução.
 	ficheiroArvoreMinimoTempo(arvoreJobMenorTempo);
